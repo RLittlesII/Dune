@@ -1,0 +1,12 @@
+<Project>
+    <PropertyGroup>
+      <Authors>RLittlesII</Authors>
+      <Copyright>Copyright Rodney Littles, II © $([System.DateTime]::Now.ToString('yyyy'))</Copyright>
+      <LangVersion>latest</LangVersion>
+      <!-- <nullable>enable</nullable> -->
+      <requireLicenseAcceptance>false</requireLicenseAcceptance>
+      <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+      <EnableNETAnalyzers>true</EnableNETAnalyzers>
+      <NukeTelemetryVersion>1</NukeTelemetryVersion>
+    </PropertyGroup>
+</Project>
