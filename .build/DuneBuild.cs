@@ -1,6 +1,7 @@
 using System.Linq;
 using JetBrains.Annotations;
 using Nuke.Common;
+using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 using Rocket.Surgery.Nuke.DotNetCore;
@@ -41,9 +42,12 @@ class DuneBuild : NukeBuild,
                                   var project =
                                       ((IHaveSolution) this).Solution.AllProjects.First(x => x.Name == "Performance");
 
-                                  DotNetBuild(configurator => configurator
-                                                                          .SetConfiguration(Configuration.Release)
-                                                                          .SetProjectFile(project.Path));
+                                  DotNetRun(configurator => configurator
+                                                            .SetConfiguration(Configuration.Release)
+                                                            .SetProjectFile(project.Path)
+                                                            .SetProcessArgumentConfigurator(
+                                                                argumentConfigurator =>
+                                                                    argumentConfigurator.Add("--filter *")));
                               });
 
     public GitVersion GitVersion { get; }

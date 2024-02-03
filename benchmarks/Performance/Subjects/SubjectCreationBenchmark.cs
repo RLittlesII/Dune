@@ -6,7 +6,7 @@ using BenchmarkDotNet.Jobs;
 namespace Performance.Subjects;
 
 /// <summary>
-/// Benchmark for the RxObject.
+/// Benchmark for a Subject.
 /// </summary>
 [SimpleJob(RuntimeMoniker.Net70)]
 [MemoryDiagnoser]
@@ -36,6 +36,7 @@ public class SubjectCreationBenchmark
     /// <summary>
     /// A benchmark for async subject creation.
     /// </summary>
+    [Benchmark]
     [BenchmarkCategory("Creation", "Memory")]
     public void AsyncSubject()
     {
@@ -48,6 +49,7 @@ public class SubjectCreationBenchmark
     /// <summary>
     /// A benchmark for async subject creation.
     /// </summary>
+    [Benchmark]
     [BenchmarkCategory("Creation", "Memory")]
     public void BehaviorSubject()
     {
@@ -60,6 +62,7 @@ public class SubjectCreationBenchmark
     /// <summary>
     /// A benchmark for async subject creation.
     /// </summary>
+    [Benchmark]
     [BenchmarkCategory("Creation", "Memory")]
     public void ReplaySubject()
     {
