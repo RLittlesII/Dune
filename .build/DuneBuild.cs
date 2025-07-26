@@ -26,11 +26,11 @@ class DuneBuild : NukeBuild,
                                                       : Configuration.Release;
 
     public Target Clean => _ => _.Before(Restore)
-                                 .Inherit<ICanClean>(x => x.Clean);
+                                 .Inherit<ICanClean>(canClean => canClean.Clean);
 
-    public Target Restore => _ => _.Inherit<ICanRestoreWithDotNetCore>(dotNetCore => dotNetCore.CoreRestore);
+    public Target Restore => _ => _.Inherit<ICanRestoreWithDotNetCore>(dotNetCore => dotNetCore.DotnetCoreRestore);
 
-    public Target Build => _ =>  _.Inherit<ICanBuildWithDotNetCore>(dotNetCore => dotNetCore.CoreBuild)
+    public Target Build => _ =>  _.Inherit<ICanBuildWithDotNetCore>(dotNetCore => dotNetCore.DotnetCoreBuild)
                                   .DependsOn(Restore);
 
     public Target Test => _ => _.Executes();
@@ -45,9 +45,7 @@ class DuneBuild : NukeBuild,
                                   DotNetRun(configurator => configurator
                                                             .SetConfiguration(Configuration.Release)
                                                             .SetProjectFile(project.Path)
-                                                            .SetProcessArgumentConfigurator(
-                                                                argumentConfigurator =>
-                                                                    argumentConfigurator.Add("--filter *")));
+                                                            .SetProcessAdditionalArguments("--filter *"));
                               });
 
     public GitVersion GitVersion { get; }
